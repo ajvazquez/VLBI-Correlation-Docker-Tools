@@ -1,0 +1,5 @@
+PSDRIV 1 /PS        PostScript printers, monochrome, landscape	Std F77
+PSDRIV 2 /VPS       Postscript printers, monochrome, portrait		Std F77
+PSDRIV 3 /CPS       PostScript printers, color, landscape		Std F77
+PSDRIV 4 /VCPS      PostScript printers, color, portrait		Std F77
+XWDRIV 2 /XSERVE    Persistent window on X Window System		C
