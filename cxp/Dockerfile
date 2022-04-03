@@ -1,7 +1,7 @@
 # References:
 # - https://github.com/ajvazquez/CXS338
 
-ARG CX_REPO=https://github.com/ajvazquez/CXS338.git
+ARG CX_REPO=https://github.com/ajvazquez/CXS338.git@master
 
 FROM python:3.8-slim-bullseye as cxp_builder
 RUN apt-get update && apt-get install -y gcc git

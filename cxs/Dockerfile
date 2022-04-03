@@ -1,7 +1,7 @@
 # References:
 # - https://github.com/ajvazquez/CXS338
 
-ARG CX_REPO=https://github.com/ajvazquez/CXS338.git
+ARG CX_REPO=https://github.com/ajvazquez/CXS338.git@master
 
 FROM bitnami/spark as cxs_builder
 #FROM apache/spark:v3.2.1
