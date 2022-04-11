@@ -68,6 +68,9 @@ RUN wget $C_HOPS && \
     rm ./$C_TARFILE && \
     mkdir build
 
+# correlator string
+ARG MKSTR
+RUN find . -name '*.c' -exec sed -ir "s@Mk4/DiFX@Mk4/$MKSTR@g" {} \;
 
 WORKDIR /usr/local/hops_src/build
 RUN ../hops-$C_HOPS_VERSION/configure \

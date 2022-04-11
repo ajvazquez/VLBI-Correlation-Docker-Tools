@@ -9,7 +9,7 @@ The aim of this project is to provide lightweight images for quick and simple ac
 * CX: CXPL38 (pipeline) [cxp](cxp), and CXS338 (Spark) [cxs](cxs) - alpha, only dev/test.
 * CX tools: CXPL ([cxp](cxp)) - alpha, only dev/test.
 * DiFX tools: [vex2difx](vex2difx), [difxcalc](difxcalc), [difx2mark4](difx2mark4).
-* HOPS: [hops](hops).
+* HOPS: [hops](hops) (hops-cxs changes the correlator string for CXS).
 
 ![CX, DiFX tools, HOPS](cx_difx_hops.png)
 (Fig. 1 from the [CorrelX manual](https://github.com/MITHaystack/CorrelX/blob/master/correlx-user-developer-guide.pdf), page 8)
@@ -39,7 +39,8 @@ All ```run*.sh``` scripts can be run with the argument ```--docker-bash```, that
 Resulting images:
 ```
 REPOSITORY     BASE          TAG                   SIZE
-hops           [debian]      latest                82.8MB
+hops           [debian]      latest                145MB
+hops-cxs       [debian]      latest                145MB
 difxcalc       [debian]      latest                89.7MB
 vex2difx       [debian]      latest                84.2MB
 difx2mark4     [debian]      latest                63.4MB
