@@ -59,10 +59,15 @@ bitnami/spark                latest                1.67GB
 ## Installation
 
 1. Install Docker: https://docs.docker.com/
-2. Run the ```build.sh``` script on the desired tool folder, or for convenience: ```bash install.sh && source ~/.bashrc```
+2. Build images and create aliases: run ```bash install_all.sh && source ~/.bashrc```.
+
+Tools can also be installed or built individually:
+* Install a single tool: run ```bash install.sh && source ~/.bashrc``` on the desired tool folder.
+* Build a single tool: run ```bash build.sh``` on the desired tool folder.
 
 The created aliases are as follows:
 * d-hops CMD (e.g.: d-hops fourfit)
+* d-hops-cxs CMD (e.g.: d-hops-cxs fourfit)
 * d-difxcalc
 * d-difx2mark4
 * d-vex2dfix
