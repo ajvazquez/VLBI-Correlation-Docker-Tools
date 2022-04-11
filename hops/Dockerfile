@@ -4,8 +4,10 @@
 
 #ARG C_HOPS_VERSION=3.9
 #ARG C_HOPS_REVISION=835
-ARG C_HOPS_VERSION=3.20
-ARG C_HOPS_REVISION=2790
+#ARG C_HOPS_VERSION=3.20
+#ARG C_HOPS_REVISION=2790
+ARG C_HOPS_VERSION=3.21
+ARG C_HOPS_REVISION=2936
 ARG C_TARFILE=hops-$C_HOPS_VERSION-$C_HOPS_REVISION.tar.gz
 ARG C_HOPS=ftp://gemini.haystack.mit.edu/pub/hops/$C_TARFILE
 ARG C_PGPLOT=ftp://ftp.astro.caltech.edu/pub/pgplot/pgplot5.2.tar.gz
@@ -65,17 +67,24 @@ RUN wget $C_HOPS && \
     tar -xzf ./$C_TARFILE && \
     rm ./$C_TARFILE && \
     mkdir build
+
+
 WORKDIR /usr/local/hops_src/build
 RUN ../hops-$C_HOPS_VERSION/configure \
 	--enable-hopes --prefix=$HDIR \
 	PNG12_LIB='/usr/lib/x86_64-linux-gnu/libpng.so' && \
 	make && \
-    make install && \
-    rm -r $HDIR/share/hops/testdata
+    make install
+#RUN rm -r $HDIR/share/hops/testdata
 
 # Target system
 FROM debian:stretch-slim
-#RUN apt-get update && apt-get install -y x11-apps
+RUN apt-get update && \
+    apt-get install -y \
+    ghostscript \
+    ghostscript-x && \
+    rm -r /var/lib/apt/*
+ARG C_HOPS
 ARG HDIR
 ARG PGPLOT_DIR
 ENV PGPLOT_DIR=$PGPLOT_DIR
@@ -105,9 +114,13 @@ RUN cat /usr/local/hops/bin/hops.bash
 ENV PATH="/usr/local/hops/bin:$PATH"
 ENV PROGDOC=/usr/local/hops/share/hops/vhelp
 COPY ctx/control_file.txt /usr/local/hops/
+ARG PFORMAT=/correlator/prog/text/
+RUN mkdir -p $PFORMAT
+COPY --from=hops_builder /usr/local/hops_src/hops*/sub/vex/text/*.txt $PFORMAT/
 ENV DEF_CONTROL="/usr/local/hops/control_file.txt"
-
 COPY ctx/run_ff.sh /usr/local/hops/
 RUN chmod +x /usr/local/hops/run_ff.sh
+
 USER 1000
+#RUN apt-get update && apt-get install -y x11-apps
 CMD ["/usr/local/hops/run_ff.sh"]
