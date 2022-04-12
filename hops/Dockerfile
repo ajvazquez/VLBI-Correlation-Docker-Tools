@@ -70,7 +70,7 @@ RUN wget $C_HOPS && \
 
 # correlator string
 ARG MKSTR
-RUN find . -name '*.c' -exec sed -ir "s@Mk4/DiFX@Mk4/$MKSTR@g" {} \;
+RUN if [ "$MKSTR" != "" ]; then find . -name '*.c' -exec sed -ir "s@Mk4/DiFX@Mk4/$MKSTR@g" {} \; ;fi
 
 WORKDIR /usr/local/hops_src/build
 RUN ../hops-$C_HOPS_VERSION/configure \
