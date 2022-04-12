@@ -18,6 +18,7 @@ FROM bitnami/spark
 USER root
 COPY --from=cxs_builder /opt/cx /opt/cx
 COPY ctx/run_cxs.sh /opt/cx/
+COPY ctx/cxs338.ini /opt/cx/
 RUN chmod +x /opt/cx/run_cxs.sh
 USER 1000
 
